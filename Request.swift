@@ -122,6 +122,7 @@ extension Dictionary: HTTPParameterProtocol {
                 }
             }
         }
+        collect.sort({ $1.key == "file" ? -1 : ($0.key == "file" ? 1 : $0.key.localizedCaseInsensitiveCompare($1.key))})
         return collect
     }
 }
