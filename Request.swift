@@ -122,7 +122,7 @@ extension Dictionary: HTTPParameterProtocol {
                 }
             }
         }
-        collect.sort({ $1.key == "file" ? -1 : ($0.key == "file" ? 1 : $0.key.localizedCaseInsensitiveCompare($1.key))})
+        collect.sortInPlace({ $1.key == "file" ? false : ($0.key == "file" ? true : $0.key!.localizedCaseInsensitiveCompare($1.key!) == NSComparisonResult.OrderedAscending)})
         return collect
     }
 }
