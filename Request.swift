@@ -264,11 +264,9 @@ extension NSMutableURLRequest {
         let mutData = NSMutableData()
         let multiCRLF = "\r\n"
         mutData.appendData("--\(boundary)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        print("--\(boundary)")
         for pair in parameters.createPairs(nil) {
             guard let key = pair.key else { continue } //this won't happen, but just to properly unwrap
             mutData.appendData("\(multiCRLF)".dataUsingEncoding(NSUTF8StringEncoding)!)
-            print("\(multiCRLF)")
             if let upload = pair.upload {
                 let data = try upload.getData()
                 mutData.appendData(multiFormHeader(key, fileName: upload.fileName,
@@ -279,10 +277,8 @@ extension NSMutableURLRequest {
                 mutData.appendData(str.dataUsingEncoding(NSUTF8StringEncoding)!)
             }
             mutData.appendData("\(multiCRLF)--\(boundary)".dataUsingEncoding(NSUTF8StringEncoding)!)
-            print("\(multiCRLF)--\(boundary)")
         }
         mutData.appendData("--\(multiCRLF)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        print("--\(multiCRLF)")
         HTTPBody = mutData
     }
     
@@ -299,7 +295,6 @@ extension NSMutableURLRequest {
             str += "Content-Type: \(t)\(multiCRLF)"
         }
         str += multiCRLF
-        print("\(str)")
         return str
     }
     
